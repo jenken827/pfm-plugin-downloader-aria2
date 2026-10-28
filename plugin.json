@@ -1,0 +1,8 @@
+{
+  "kind": "downloader",
+  "downloader_id": "aria2",
+  "exec": "./pfm-plugin-downloader-aria2",
+  "abi_version": 1,
+  "name": "pfm-plugin-downloader-aria2",
+  "version": "1.0.0"
+}
