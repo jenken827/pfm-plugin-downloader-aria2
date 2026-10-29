@@ -1,18 +1,18 @@
 # pfm-plugin-downloader-aria2
 
-aria2 离线下载后端，pfm 的官方插件（独立进程，kind=downloader）。
+aria2 离线下载后端，[pfm](https://github.com/jenken827/pfm) 的官方插件（独立进程，kind=downloader）。
 
 ## 这是什么
 
-pfm 核心不再内置任何下载器客户端：离线下载的「提交任务 / 查进度 / 取消」由
-`kind: downloader` 插件提供，这个插件把 pfm 的下载器协议翻译成 aria2 的 JSON-RPC。
+[pfm](https://github.com/jenken827/pfm) 核心不再内置任何下载器客户端：离线下载的「提交任务 / 查进度 / 取消」由
+`kind: downloader` 插件提供，这个插件把 [pfm](https://github.com/jenken827/pfm) 的下载器协议翻译成 aria2 的 JSON-RPC。
 
 下载产物落在**宿主机**上（插件与宿主同机），算 blake3、建文件记录、分发到各
-存储提供者这些入库动作仍然由 pfm 做——插件不碰数据库与存储。
+存储提供者这些入库动作仍然由 [pfm](https://github.com/jenken827/pfm) 做——插件不碰数据库与存储。
 
 ## 配置
 
-pfm 的 `config.yaml`：
+[pfm](https://github.com/jenken827/pfm) 的 `config.yaml`：
 
 ```yaml
 plugin:
@@ -53,7 +53,7 @@ go work init . ../pfm-plugin-sdk
 
 ## 安装
 
-目录布局（放到 pfm 的 `plugin.dir` 下）：
+目录布局（放到 [pfm](https://github.com/jenken827/pfm) 的 `plugin.dir` 下）：
 
 ```
 plugins/pfm-plugin-downloader-aria2/
@@ -66,13 +66,13 @@ plugins/pfm-plugin-downloader-aria2/
 
 ## 插件做什么 / 不做什么
 
-| 由插件负责 | 由 pfm 负责 |
+| 由插件负责 | 由 [pfm](https://github.com/jenken827/pfm) 负责 |
 |---|---|
 | 连 aria2（http/ws）、提交 URL/磁力、查状态、取消 | 校验提交的 URL（SSRF 防护）、建任务记录 |
 | 把 aria2 的状态归一成协议里的 `DownloadStatus` | 找产物文件、算 blake3、建文件记录、分发 provider |
 | 数值字段格式化（协议里长度/速度是十进制字符串） | 完成/失败判定与入库重试 |
 
-宿主不订阅 aria2 的推送通知：pfm 每 5 秒对一次任务状态（见 `internal/download/reconcile.go`）。
+宿主不订阅 aria2 的推送通知：[pfm](https://github.com/jenken827/pfm) 每 5 秒对一次任务状态（见 `internal/download/reconcile.go`）。
 
 ## 发布
 
